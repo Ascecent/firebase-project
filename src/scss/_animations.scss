@@ -1,0 +1,40 @@
+/*=========================================================
+================         ANIMATIONS       =================
+=========================================================*/
+
+.cover {
+  &-leave-active,
+  &-enter-active {
+    transition: transform 500ms var(--easing);
+
+    .transition {
+      transition: transform 500ms var(--easing);
+    }
+  }
+
+  // Cover in
+  &-leave {
+    .transition {
+      transform: translateY(-100%);
+    }
+
+    &-to {
+      .transition {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  // Cover down
+  &-enter {
+    .transition {
+      transform: translateY(0);
+    }
+
+    &-to {
+      .transition {
+        transform: translateY(100%);
+      }
+    }
+  }
+}
