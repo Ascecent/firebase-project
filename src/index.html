@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/8203d82a3e.js" crossorigin="anonymous"></script>
+    <script defer src="../node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
     <title>Login</title>
 </head>
 
@@ -28,23 +28,34 @@
         </section>
 
         <section class="right-section">
+            <div class="logo-wrapper">
+                <img src="./assets/logo.svg" alt="Visme logo">
+            </div>
+            <h1 class="heading">Create amazing content</h1>
+            <p class="heading-description">Welcome back! Please use your email or another service to sign in.</p>
             <form id="login-form" class="form-wrapper">
                 <div class="form-control">
-                    <input type="email" id="loginEmail" placeholder=" " required />
-                    <label for="loginEmail">Email</label>
-                    <span class="fa-solid fa-circle-exclamation icon"></span>
-                    <span class="fa-solid fa-circle-check icon"></span>
+                    <div class="input-wrapper">
+                        <input type="email" id="loginEmail" placeholder=" " required />
+                        <label for="loginEmail">Email</label>
+                        <span class="fa-solid fa-circle-exclamation icon error-icon"></span>
+                        <span class="fa-solid fa-circle-check icon success-icon"></span>
+                    </div>
                     <small class="feedback-message">Default Message</small>
                 </div>
                 <div class="form-control">
-                    <input type="password" id="loginPassword" placeholder=" " required />
-                    <label for="loginPassword">Password</label>
-                    <span class="fa-solid fa-circle-exclamation icon"></span>
-                    <span class="fa-solid fa-circle-check icon"></span>
+                    <div class="input-wrapper">
+                        <input type="password" id="loginPassword" placeholder=" " required />
+                        <label for="loginPassword">Password</label>
+                        <span class="fa-solid fa-circle-exclamation icon error-icon"></span>
+                        <span class="fa-solid fa-circle-check icon success-icon"></span>
+                    </div>
                     <small class="feedback-message">Default Message</small>
                 </div>
                 <button class="btn btn-submit" type="submit" id="login">Login</button>
             </form>
+            <button class="btn btn-social-signin"></button>
+            <button class="btn btn-social-signin"></button>
         </section>
     </main>
 </body>

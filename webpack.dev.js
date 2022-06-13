@@ -1,13 +1,14 @@
 const {
     merge
-} = require("webpack-merge");
-const common = require("./webpack.common.js");
+} = require("webpack-merge")
+
+const common = require("./webpack.common.js")
 
 module.exports = merge(common, {
     mode: "development",
     devtool: "source-map",
     devServer: {
-        static: "./dist",
+        static: "./build",
         port: 5500,
         open: true,
         compress: true,

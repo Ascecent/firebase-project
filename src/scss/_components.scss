@@ -47,15 +47,28 @@
   padding: 0.8rem 0;
   width: 100%;
 
+  .input-wrapper {
+    position: relative;
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 1rem;
+      visibility: hidden;
+    }
+  }
+
   label {
     position: absolute;
-    top: 1.5rem;
+    top: 50%;
     left: 1rem;
     font-size: 1rem;
     background-color: #fff;
     color: #aaa;
     transition: top 0.1s ease, font-size 0.1s ease, left 0.1s ease,
       padding 0.1s ease;
+    transform: translateY(-50%);
   }
 
   input {
@@ -76,27 +89,21 @@
       color: #b4b4b4;
     }
 
-    &:disabled ~ label {
-      left: -0.5rem;
-      top: -1rem;
-      color: #b4b4b4;
-      font-size: 0.9rem;
-      padding: 0.3rem 0.5rem;
-      background-color: transparent;
-    }
-
     &:disabled {
       background-color: #e0e0e0;
       outline-color: #e0e0e0;
+
+      ~ label {
+        left: -0.5rem;
+        top: -1rem;
+        color: #b4b4b4;
+        font-size: 0.9rem;
+        padding: 0.3rem 0.5rem;
+        background-color: transparent;
+      }
     }
   }
 
-  .fa-solid {
-    position: absolute;
-    top: 1.7rem;
-    right: 1rem;
-    visibility: hidden;
-  }
   &.success {
     input {
       outline: 2px solid $success;

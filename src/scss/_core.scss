@@ -59,7 +59,15 @@ $active-tick: #ffffff;
 // FONTS
 // ------------
 
+// Poppins font (normal font)
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+// Montserrat font (headings)
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 // Family
+$fontFamilyNormal: "Poppins", sans-serif;
+$fontFamilyHeadings: "Montserrat", sans-serif;
 
 // Size
 $fontSizeNormal: 1rem;
@@ -115,4 +123,23 @@ $fontWeightBold: 700;
 
 :root {
   --easing: cubic-bezier(0.5, 0.7, 0.4, 1);
+}
+
+body {
+  font: {
+    family: $fontFamilyNormal;
+    weight: $fontWeightRegular;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: {
+    family: $fontFamilyHeadings;
+    weight: $fontWeightBold;
+  }
 }

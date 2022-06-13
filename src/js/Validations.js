@@ -65,23 +65,23 @@ export const Validation = config => {
         }
     }
 
-    const inputStateHandler = function (input, message, validation) {
+    const inputStateHandler = (input, message, validation) => {
         validation ? successfulInputStateHandler(input) : inputErrorStateHandler(input, message)
     }
 
-    const inputErrorStateHandler = function (input, message) {
-        const formControl = input.parentElement,
+    const inputErrorStateHandler = (input, message) => {
+        const formControl = input.parentElement.parentElement,
             small = formControl.querySelector('.feedback-message')
 
         small.innerText = message
         formControl.className = 'form-control error'
     }
 
-    const successfulInputStateHandler = function (input) {
-        input.parentElement.className = 'form-control success';
+    const successfulInputStateHandler = input => {
+        input.parentElement.parentElement.className = 'form-control success';
     }
 
-    const submitButtonStateHandler = function () {
+    const submitButtonStateHandler = () => {
         submitButton.disabled = !validityState
         validityState ? submitButton.classList.remove('disabled') : submitButton.classList.add('disabled')
     }

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Ascecent/firebase-project#readme",
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "autoprefixer": "^10.4.7",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
