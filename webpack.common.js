@@ -10,6 +10,11 @@ const {
 // -------------------------------
 // Individual rules config
 
+const rulesForHTML = {
+    test: /\.html$/,
+    loader: "html-loader",
+}
+
 const rulesForAssets = {
     test: /\.(png|svg|jpg|jpeg|gif)$/i,
     exclude: "/node_modules",
@@ -75,7 +80,7 @@ const plugins = [
 
 // -------------------------------
 
-const rules = [rulesForSassStyles, rulesForAssets];
+const rules = [rulesForSassStyles, rulesForAssets, rulesForHTML];
 
 module.exports = {
     entry: './src/js/App.js',

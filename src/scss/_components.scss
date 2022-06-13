@@ -2,6 +2,22 @@
 ================         COMPONENTS       =================
 =========================================================*/
 
+// Buttons
+.btn {
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 1rem;
+
+  &-submit {
+    margin-bottom: 3rem;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    background: $red;
+  }
+}
+
 // Transition component
 .transition {
   position: absolute;
@@ -15,4 +31,103 @@
   justify-content: center;
   transform: translateY(-100%);
   z-index: 10;
+}
+
+// Form component
+.feedback-message {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  visibility: hidden;
+  color: $error;
+}
+
+.form-control {
+  position: relative;
+  padding: 0.8rem 0;
+  width: 100%;
+
+  label {
+    position: absolute;
+    top: 1.5rem;
+    left: 1rem;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #aaa;
+    transition: top 0.1s ease, font-size 0.1s ease, left 0.1s ease,
+      padding 0.1s ease;
+  }
+
+  input {
+    padding: 1rem 2.5rem 1rem 1rem;
+    font-size: 1rem;
+    width: 100%;
+    border: none;
+    height: 2.7rem;
+    outline: 2px solid #ccc;
+    border-radius: 0.1rem;
+
+    &:focus ~ label,
+    &:not(:placeholder-shown) ~ label {
+      padding: 0.3rem 0.5rem;
+      font-size: 0.9rem;
+      left: 0.5rem;
+      top: -0.5rem;
+      color: #b4b4b4;
+    }
+
+    &:disabled ~ label {
+      left: -0.5rem;
+      top: -1rem;
+      color: #b4b4b4;
+      font-size: 0.9rem;
+      padding: 0.3rem 0.5rem;
+      background-color: transparent;
+    }
+
+    &:disabled {
+      background-color: #e0e0e0;
+      outline-color: #e0e0e0;
+    }
+  }
+
+  .fa-solid {
+    position: absolute;
+    top: 1.7rem;
+    right: 1rem;
+    visibility: hidden;
+  }
+  &.success {
+    input {
+      outline: 2px solid $success;
+    }
+
+    label {
+      color: $success !important;
+    }
+
+    .success-icon {
+      color: $success;
+      visibility: visible;
+    }
+  }
+
+  &.error {
+    input {
+      outline: 2px solid $error;
+    }
+
+    label {
+      color: $error !important;
+    }
+
+    .error-icon {
+      color: $error;
+      visibility: visible;
+    }
+
+    .feedback-message {
+      visibility: visible;
+    }
+  }
 }
