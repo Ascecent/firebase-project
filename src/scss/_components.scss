@@ -2,6 +2,55 @@
 ================         COMPONENTS       =================
 =========================================================*/
 
+// Spinner loaders
+.loader-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dot-loader,
+.dot-loader:before,
+.dot-loader:after {
+  color: $white;
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: bblFadInOut 1.3s infinite ease-in-out;
+}
+
+.dot-loader {
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+  }
+
+  &:before {
+    left: -3.5em;
+    animation-delay: -0.32s;
+  }
+
+  &:after {
+    left: 3.5em;
+  }
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: $white;
+  font-size: 7px;
+  text-indent: -9999em;
+  animation-delay: -0.16s;
+}
+
 // Utilities
 .vertical-align {
   position: absolute;
@@ -139,7 +188,8 @@
     }
   }
 
-  input {
+  input,
+  select {
     width: 100%;
     color: currentColor;
     padding: 1rem;
@@ -154,6 +204,10 @@
     }
   }
 
+  option {
+    color: $black;
+  }
+
   .input-icon {
     position: absolute;
     top: 50%;
@@ -164,12 +218,12 @@
 
   .feedback {
     position: absolute;
-    bottom: -1.3rem;
+    bottom: -1.4rem;
     left: 0;
   }
 }
 
-.signup-redirect {
+.redirect {
   margin-block-start: pxToRem(20);
   display: block;
   color: $black;

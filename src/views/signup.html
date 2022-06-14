@@ -11,8 +11,86 @@
 <body data-barba="wrapper">
     <main data-barba="container" data-barba-namespace="signup" class="main">
         <div class="transition"></div>
-        <div>SIGNUP</div>
-        <a href="index.html">Login</a>
+
+        <section class="left-section">
+            <div class="graphic" id="graphic-container"></div>
+
+            <div class="description">
+                <div class="description-line1">
+                    <img src="./../assets/login-illustration-1.webp" alt="Login illustration" id="login-illustration">
+                </div>
+                <div class="description-line2">
+                    <img src="./../assets/treasure-logo.svg" alt="Feature highlight">
+                    <span>FEATURE HIGHLIGHT</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="right-section">
+            <div class="logo-wrapper">
+                <img src="./../assets/logo.svg" alt="Visme logo">
+            </div>
+            <h1 class="heading">Create amazing content</h1>
+            <p class="heading-description">Create your free account and join 15.3+ million others enjoying using Visme.
+            </p>
+            <form id="signup-form" class="form-wrapper">
+                <div class="form-control">
+                    <input type="email" id="signUpFullName" name="signUpFullName" placeholder="Full name" required
+                        title="Please enter your full name" />
+                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <div class="feedback">
+                        <span class="fa-solid fa-triangle-exclamation error-icon"></span>
+                        <small class="feedback-message">Default Message</small>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <input type="phone" id="signUpPhone" name="signUpPhone" placeholder="Phone number" required
+                        title="Please enter your phone number" />
+                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <div class="feedback">
+                        <span class="fa-solid fa-triangle-exclamation error-icon"></span>
+                        <small class="feedback-message">Default Message</small>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <select id="signUpGender" name="signUpGender" required title="Please select your gender">
+                        <option value="">Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <div class="feedback">
+                        <span class="fa-solid fa-triangle-exclamation error-icon"></span>
+                        <small class="feedback-message">Default Message</small>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <input type="email" id="signUpEmail" name="signUpEmail" placeholder="Email" required
+                        title="Please enter your email address" />
+                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <div class="feedback">
+                        <span class="fa-solid fa-triangle-exclamation error-icon"></span>
+                        <small class="feedback-message">Default Message</small>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <input type="password" id="signUpPassword" name="signUpPassword" placeholder="Password" required
+                        title="Please enter a valid password" />
+                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <div class="feedback">
+                        <span class="fa-solid fa-triangle-exclamation error-icon"></span>
+                        <small class="feedback-message">Default Message</small>
+                    </div>
+                </div>
+
+                <button class="btn btn-submit" type="submit" id="signup">Sign Up</button>
+            </form>
+            <a href="index.html" class="redirect">Already have an account? <strong>Login</strong></a>
+        </section>
     </main>
 </body>
 

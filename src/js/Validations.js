@@ -3,6 +3,7 @@
 
 const expressions = {
     'email': /^(([^<>()\[\]\\.,;:\s@\']+(\.[^<>()\[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    'text': /^([a-zA-ZáéíóúÁÉÍÓÚñÑ.]+( )*)+$/,
     getExpression: function (exp) {
         return this[exp] || null
     }
@@ -33,7 +34,7 @@ export const Validation = config => {
             selector: true
         }),
         formControls = getDOMItems(`#${config.formId} .${config.formControls}`),
-        formInputs = getDOMItems(`#${config.formId} input`),
+        formInputs = getDOMItems(`#${config.formId} input, #${config.formId} select`),
         validationObject = Object.fromEntries(items.map(item => [item.id, false]))
 
     Object.preventExtensions(validationObject)
@@ -46,6 +47,7 @@ export const Validation = config => {
     // Validation functionality
 
     const validationHandler = target => {
+        console.log(target)
         const targetId = target.getAttribute('id'),
             item = items.find(element => element.id === targetId),
             value = target.value,
@@ -53,10 +55,17 @@ export const Validation = config => {
             message = item.feedbackMessage
 
         if (item) {
-            const validationState =
-                validation == 'notEmpty' ?
-                !(value === '') :
-                expressions.getExpression(validation).test(value);
+            let validationState
+
+            if (item.customValidation) {
+                validationState = item.customValidation(target)
+            } else {
+                validationState =
+                    validation == 'notEmpty' ?
+                    !(value === '') :
+                    expressions.getExpression(validation).test(value);
+            }
+
 
             validationObject[targetId] = validationState
             inputStateHandler(target, message, validationState)
@@ -98,7 +107,7 @@ export const Validation = config => {
                     validationHandler(e.target)
                 })
 
-                input.addEventListener('click', e => {
+                input.addEventListener('focus', e => {
                     validationHandler(e.target)
                 })
             })

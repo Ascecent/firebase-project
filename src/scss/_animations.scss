@@ -2,6 +2,7 @@
 ================         ANIMATIONS       =================
 =========================================================*/
 
+// Barba transitions
 .cover {
   &-leave-active,
   &-enter-active {
@@ -36,5 +37,17 @@
         transform: translateY(100%);
       }
     }
+  }
+}
+
+// Loaders animations
+@keyframes bblFadInOut {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em;
+  }
+  40% {
+    box-shadow: 0 2.5em 0 0;
   }
 }
