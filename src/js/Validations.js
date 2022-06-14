@@ -23,6 +23,7 @@ const getDOMItems = selector => document.querySelectorAll(selector)
 
 // Form validation implementation
 export const Validation = config => {
+    document.getElementById(config.formId).reset()
     const items = config.DOMItems
 
     // -------------------------------
@@ -70,7 +71,7 @@ export const Validation = config => {
     }
 
     const inputErrorStateHandler = (input, message) => {
-        const formControl = input.parentElement.parentElement,
+        const formControl = input.parentElement,
             small = formControl.querySelector('.feedback-message')
 
         small.innerText = message
@@ -78,7 +79,7 @@ export const Validation = config => {
     }
 
     const successfulInputStateHandler = input => {
-        input.parentElement.parentElement.className = 'form-control success';
+        input.parentElement.className = 'form-control success'
     }
 
     const submitButtonStateHandler = () => {

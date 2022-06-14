@@ -1,3 +1,18 @@
 /*=========================================================
 ================         LAYOUT           =================
 =========================================================*/
+
+.social-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+
+  @include media-breakpoint-up("sm") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+}

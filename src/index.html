@@ -35,27 +35,34 @@
             <p class="heading-description">Welcome back! Please use your email or another service to sign in.</p>
             <form id="login-form" class="form-wrapper">
                 <div class="form-control">
-                    <div class="input-wrapper">
-                        <input type="email" id="loginEmail" placeholder=" " required />
-                        <label for="loginEmail">Email</label>
-                        <span class="fa-solid fa-circle-exclamation icon error-icon"></span>
-                        <span class="fa-solid fa-circle-check icon success-icon"></span>
+                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email" required
+                        title="Please enter your email address" />
+                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <div class="feedback">
+                        <span class="fa-solid fa-circle-exclamation error-icon"></span>
+                        <small class="feedback-message">Default Message</small>
                     </div>
-                    <small class="feedback-message">Default Message</small>
                 </div>
                 <div class="form-control">
-                    <div class="input-wrapper">
-                        <input type="password" id="loginPassword" placeholder=" " required />
-                        <label for="loginPassword">Password</label>
-                        <span class="fa-solid fa-circle-exclamation icon error-icon"></span>
-                        <span class="fa-solid fa-circle-check icon success-icon"></span>
+                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required
+                        title="Please enter your password" />
+                    <span class="fa-solid fa-key input-icon"></span>
+                    <div class="feedback">
+                        <span class="fa-solid fa-circle-exclamation error-icon"></span>
+                        <small class="feedback-message">Default Message</small>
                     </div>
-                    <small class="feedback-message">Default Message</small>
                 </div>
                 <button class="btn btn-submit" type="submit" id="login">Login</button>
             </form>
-            <button class="btn btn-social-signin"></button>
-            <button class="btn btn-social-signin"></button>
+            <div class="separator">
+                <hr>
+                <span>Or login with</span>
+            </div>
+            <div class="social-buttons">
+                <button class="btn btn-social-signin google" id="google-auth">Google</button>
+                <button class="btn btn-social-signin facebook" id="facebook-auth">Facebook</button>
+            </div>
+            <a href="signup.html" class="signup-redirect">New to Visme? <strong>Sign Up</strong></a>
         </section>
     </main>
 </body>
