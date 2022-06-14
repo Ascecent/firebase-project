@@ -1,20 +1,19 @@
 import {
-    initializeApp
-} from 'firebase/app'
+    app
+} from './config'
 import {
     getAuth,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     FacebookAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    createUserWithEmailAndPassword
 } from "firebase/auth"
-import config from './config'
 import Swal from 'sweetalert2'
 
-const app = initializeApp(config),
-    auth = getAuth()
+const auth = getAuth(app)
 
-export const emailSignIn = data => {
+const emailSignIn = data => {
     signInWithEmailAndPassword(auth, data.get('loginEmail'), data.get('loginPassword'))
         .then(userCredential => {
             Swal.fire({
@@ -40,7 +39,7 @@ export const emailSignIn = data => {
         });
 }
 
-export const googleSignIn = () => {
+const googleSignIn = () => {
     signInWithPopup(auth, new GoogleAuthProvider())
         .then(result => {
             const credential = GoogleAuthProvider.credentialFromResult(result)
@@ -65,7 +64,7 @@ export const googleSignIn = () => {
         })
 }
 
-export const facebookSignIn = () => {
+const facebookSignIn = () => {
     signInWithPopup(auth, new FacebookAuthProvider())
         .then(result => {
             const user = result.user
@@ -89,4 +88,20 @@ export const facebookSignIn = () => {
         .catch(error => {
             console.error(error)
         })
+}
+
+const createUser = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+            return userCredential
+        }).catch(error => {
+            console.error(error)
+        })
+}
+
+export default {
+    emailSignIn,
+    facebookSignIn,
+    googleSignIn,
+    createUser
 }

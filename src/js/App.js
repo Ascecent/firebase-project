@@ -4,15 +4,14 @@ import barbaCss from "@barba/css"
 import {
     Validation
 } from "./Validations"
-import {
-    emailSignIn,
-    googleSignIn,
-    facebookSignIn
-} from "./firebase/Auth"
+import auth from "./firebase/Auth"
 import Swal from 'sweetalert2'
 import {
     createSpinnerLoader
 } from './utils'
+import {
+    addUser
+} from "./firebase/Firestore"
 
 const dotLoader = createSpinnerLoader('dot-loader')
 
@@ -21,9 +20,8 @@ barba.init({
     views: [{
             namespace: 'login',
             beforeEnter() {
-                const formId = 'login-form'
                 const validation = Validation({
-                    formId: formId,
+                    formId: 'login-form',
                     formControls: 'form-control',
                     DOMItems: [{
                         id: 'loginEmail',
@@ -38,7 +36,7 @@ barba.init({
 
                 validation.init()
 
-                document.getElementById(formId).addEventListener('submit', function (e) {
+                document.getElementById(validation.getFormId()).addEventListener('submit', function (e) {
                     document.body.appendChild(dotLoader)
                     e.preventDefault()
 
@@ -53,20 +51,18 @@ barba.init({
                         return
                     }
 
-                    const data = new FormData(this)
-                    emailSignIn(data)
+                    auth.emailSignIn(validation.serializeInputs())
                 })
 
-                document.getElementById('google-auth').addEventListener('click', googleSignIn)
-                document.getElementById('facebook-auth').addEventListener('click', facebookSignIn)
+                document.getElementById('google-auth').addEventListener('click', auth.googleSignIn)
+                document.getElementById('facebook-auth').addEventListener('click', auth.facebookSignIn)
             }
         },
         {
             namespace: 'signup',
             beforeEnter() {
-                const formId = 'signup-form'
                 const validation = Validation({
-                    formId: formId,
+                    formId: 'signup-form',
                     formControls: 'form-control',
                     DOMItems: [{
                         id: 'signUpFullName',
@@ -93,6 +89,32 @@ barba.init({
 
                 validation.init()
 
+                document.getElementById(validation.getFormId()).addEventListener('submit', function (e) {
+                    document.body.appendChild(dotLoader)
+                    e.preventDefault()
+
+                    if (!validation.getValidityState()) {
+                        Swal.fire({
+                            title: 'Invalid form',
+                            text: 'It seems that the form has been compromised, please refresh the page and try again.',
+                            icon: 'error',
+                            confirmButtonColor: '#e74c3c',
+                        })
+
+                        return
+                    }
+
+                    const data = validation.serializeInputs()
+                    const uid = auth.createUser(data.signUpEmail, data.signUpPassword)
+                    console.log(uid)
+
+                    addUser({
+                        'auth-id': uid,
+                        'name': data.signUpFullName,
+                        'gender': data.signUpGender,
+                        'phone': data.signUpPhone
+                    })
+                })
             }
         }
     ],

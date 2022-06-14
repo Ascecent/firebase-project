@@ -4,6 +4,7 @@
 const expressions = {
     'email': /^(([^<>()\[\]\\.,;:\s@\']+(\.[^<>()\[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     'text': /^([a-zA-ZáéíóúÁÉÍÓÚñÑ.]+( )*)+$/,
+    'numbers': /^[0-9]+$/,
     getExpression: function (exp) {
         return this[exp] || null
     }
@@ -24,17 +25,18 @@ const getDOMItems = selector => document.querySelectorAll(selector)
 
 // Form validation implementation
 export const Validation = config => {
-    document.getElementById(config.formId).reset()
+    const form = config.formId
+    document.getElementById(form).reset()
     const items = config.DOMItems
 
     // -------------------------------
     // Object configuration for properly handling validation
 
-    const submitButton = getDOMItem(`#${config.formId} button[type="submit"]`, {
+    const submitButton = getDOMItem(`#${form} button[type="submit"]`, {
             selector: true
         }),
-        formControls = getDOMItems(`#${config.formId} .${config.formControls}`),
-        formInputs = getDOMItems(`#${config.formId} input, #${config.formId} select`),
+        formControls = getDOMItems(`#${form} .${config.formControls}`),
+        formInputs = getDOMItems(`#${form} input, #${form} select`),
         validationObject = Object.fromEntries(items.map(item => [item.id, false]))
 
     Object.preventExtensions(validationObject)
@@ -112,6 +114,16 @@ export const Validation = config => {
                 })
             })
         },
-        getValidityState: () => validityState
+        getValidityState: () => validityState,
+        getFormId: () => form,
+        serializeInputs: () => {
+            const output = []
+
+            formInputs.forEach(input => {
+                output.push([input.getAttribute('name'), input.value])
+            })
+
+            return Object.fromEntries(output)
+        }
     })
 }
