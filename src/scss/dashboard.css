@@ -87,7 +87,8 @@
 
 #cuerpo ul li a:hover{
     color: #131414;
-    text-decoration:underline;
+    border-bottom: 5px solid #131414;
+    padding-bottom: 5px;
 }
 
 #cuerpo.active{
