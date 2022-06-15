@@ -67,7 +67,7 @@
 
 #cuerpo{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding: 75px 0px;
+    padding: 5px 50px;
     width: 100%;
     height: 100%;
     background-color: #F6F6F6;
@@ -92,7 +92,7 @@
 }
 
 #cuerpo.active{
-    padding-left: 200px;
+    padding-left: 250px;
 }
 
 #cuerpo2{
