@@ -10,38 +10,19 @@
 
 <body data-barba="wrapper">
     <main data-barba="container" data-barba-namespace="home" class="main">
-        <div id="sidebar" class="active">
-            <div class="toggle-btn">
-                <span>&#9776;</span>
+        <div id="sidebar" class="sidebar active">
+            <div class="toggle-btn" id="toggle-btn">
+                <span class="fa-solid fa-bars"></span>
             </div>
-            <ul>
-                <li>
-                    <img src="../assets/logo.svg" alt="logotipo" class="logo">
-                </li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <div id="logout">
-                    <li><a href="#">LogOut</a></li>
-                </div>
-            </ul>
+            <img src="../assets/logo.svg" alt="logotipo" class="logo">
+            <div href="#" class="logout-btn">
+                <span class="fa-solid fa-power-off"></span>&nbsp;
+                Logout
+            </div>
         </div>
         <div id="cuerpo" class="active">
-            <h1>Dashboard</h1>
-            <ul>
-                <li><a href="#">Summary</a></li>
-                <li><a href="#">Statistic</a></li>
-                <li><a href="#">Overview</a></li>
-                <li><a href="#">Account</a></li>
-            </ul>
+            <h1>Home</h1>
             <div id="cuerpo2">
-                <form id="task-form">
-                    <label for="title">Title:</label>
-                    <input type="text" placeholder="Task Title" id="task-title"> <label
-                        for="description">Description</label>
-                    <textarea name="task-description" rows="3" placeholder="Task Description"></textarea>
-                    <button id="btn-task-save">Guardar</button>
-                </form>
             </div>
             <div id="tasks-container">
             </div>
