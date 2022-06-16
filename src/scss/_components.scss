@@ -105,12 +105,6 @@
     }
   }
 
-  .parte1{
-    width: 75px;
-    height: 75px;
-    border: #000 solid 5px;
-  }
-
   #plan-nutricional{
     cursor: pointer;
 
@@ -334,6 +328,10 @@
     .error-icon,
     .feedback-message {
       visibility: visible;
+    }
+
+    &.alimento{
+      padding-top: 5px;
     }
   }
 
