@@ -22,10 +22,32 @@
         </div>
         <div id="cuerpo" class="active">
             <h1>Home</h1>
-            <div id="cuerpo2">
-            </div>
-            <div id="tasks-container">
-            </div>
+            <form id="plan-nutricional" class="form-wrapper">
+                <div class="form-control">
+                    <select name="dia_de_la_semana" id="dia_de_la_semana">
+                        <option value="L">Lunes</option>                            <option value="M">Martes</option>
+                        <option value="MI">Miercoles</option>
+                        <option value="J">Jueves</option>
+                        <option value="V">Viernes</option>
+                        <option value="S">Sábado</option>
+                        <option value="D">Domingo</option>
+                    </select>
+                    <textarea name="alimento" id="alimento" cols="30" rows="10" title="">  
+                     </textarea>
+                </div>
+                <div class="form-control">
+                    <div class="image-input" id="image-input">
+                        <div>
+                            Upload your profile photo
+                        </div>
+                        <input type="file" accept="image/*" id="signUpPhoto" name="signUpPhoto" required />
+                    </div>
+                    <div class="feedback">
+                        <small class="feedback-message">Default Message</small>
+                    </div>
+                </div>
+                <button class="btn btn-submit" type="submit" id="ingreso-Plan">Registrar Plan Nutricional</button>
+            </form>
         </div>
     </main>
 </body>
