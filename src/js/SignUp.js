@@ -1,6 +1,3 @@
-import {
-    async
-} from "@firebase/util"
 import Swal from "sweetalert2"
 import {
     createSpinnerLoader,
