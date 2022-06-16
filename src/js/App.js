@@ -8,6 +8,8 @@ import Storage from "./firebase/Storage"
 
 import Login from "./Login"
 import SignUp from "./SignUp"
+import Home from './Home'
+
 import "@fortawesome/fontawesome-free/js/all"
 
 const authentication = Authentication(),
@@ -25,8 +27,13 @@ barba.init({
         {
             namespace: 'signup',
             beforeEnter() {
-                console.log('signup')
                 SignUp(authentication, firestore, storage)
+            }
+        },
+        {
+            namespace: 'home',
+            beforeEnter() {
+                Home()
             }
         }
     ],

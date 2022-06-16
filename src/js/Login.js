@@ -29,6 +29,8 @@ const dotLoader = createSpinnerLoader('dot-loader'),
                 swalConfig.title = 'Oh no!, Something is wrong'
                 swalConfig.text = res.msj
             }
+
+            Swal.fire(swalConfig)
         }, 500)
     }
 
@@ -85,7 +87,7 @@ export default function Login(authentication) {
 
         authentication.signInAPI(provider)
             .then(res => {
-                handleRes
+                handleRes(res)
             })
             .catch(err => console.error(err))
     }
