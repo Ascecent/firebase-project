@@ -86,14 +86,139 @@
   width: pxToRem(200);
 }
 
-// Left column
-.left-section {
-  display: none;
+[data-barba-namespace="login"],
+[data-barba-namespace="signup"] {
+  // Left column
+  .left-section {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  // Right column
+  .right-section {
+    padding: 2rem;
+    max-width: pxToRem(700);
+
+    @include media-breakpoint-up("lg") {
+      padding-inline: 3rem;
+    }
+  }
+
+  #signup-form {
+    .image-input {
+      cursor: pointer;
+      
+      border-radius: pxToRem(10);
+      border: 2px solid $black;
+
+      width: pxToRem(150);
+      height: pxToRem(150);
+
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      input {
+        display: none;
+      }
+    }
+  }
 }
 
-// Right column
-.right-section {
-  padding: 2rem;
+[data-barba-namespace="signup"] {
+  .left-section {
+    background: url("https://dashboard.visme.co/v2/img/signup.14be1d5e.webp")
+      no-repeat center/cover;
+
+    @include media-breakpoint-up("lg") {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .description {
+    width: 80%;
+    height: pxToRem(400);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: pxToRem(30);
+    display: grid;
+
+    &-card {
+      padding: pxToRem(30);
+      border-radius: pxToRem(10);
+      color: $black;
+      background-color: $white;
+
+      p {
+        font-size: pxToRem(21);
+      }
+
+      p.card-heading {
+        margin: 0;
+        font: {
+          size: pxToRem(60);
+          weight: $fontWeightBold;
+          font-family: $fontFamilyHeadings;
+        }
+      }
+
+      .stars {
+        font-size: pxToRem(22);
+        margin-block-end: pxToRem(15);
+        color: $stars;
+      }
+
+      .reviews {
+        font-size: pxToRem(18);
+      }
+
+      .review-logo {
+        margin-block-start: pxToRem(15);
+        font-size: pxToRem(40);
+      }
+    }
+  }
+}
+
+[data-barba-namespace="login"] {
+  .left-section {
+    background-color: $sunshine;
+
+    @include media-breakpoint-up("lg") {
+      align-items: center;
+      display: flex;
+    }
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-line1 {
+      width: 90%;
+    }
+
+    &-line2 {
+      text-align: center;
+      display: flex;
+      gap: pxToRem(20);
+      align-items: center;
+
+      span {
+        font-weight: $fontWeightBold;
+        color: $grayish;
+      }
+
+      img {
+        width: pxToRem(38);
+        height: pxToRem(38);
+      }
+    }
+  }
 }
 
 // Buttons
@@ -131,6 +256,7 @@
     border: 1px solid #bbd0e5;
     background-color: $gray;
     color: $black;
+
     background-repeat: no-repeat;
     background-position: pxToRem(12) center;
     background-size: pxToRem(25) pxToRem(25);
@@ -147,15 +273,10 @@
 
 // Transition component
 .transition {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100%;
-  top: 0;
-  left: 0;
   background-color: $primary;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transform: translateY(-100%);
   z-index: 10;
 }
@@ -165,6 +286,8 @@
   visibility: hidden;
   color: currentColor;
 }
+
+// Login form
 
 .form-control {
   position: relative;

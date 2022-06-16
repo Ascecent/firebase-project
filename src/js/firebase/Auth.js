@@ -1,107 +1,122 @@
 import {
-    app
-} from './config'
-import {
     getAuth,
+    signOut,
+    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     FacebookAuthProvider,
     signInWithPopup,
-    createUserWithEmailAndPassword
-} from "firebase/auth"
-import Swal from 'sweetalert2'
+} from "firebase/auth";
+import app from './config'
 
-const auth = getAuth(app)
+const generateResponse = () => {
+    return {
+        success: false,
+        msj: '',
+        user: null,
+        uid: null,
+    }
+}
 
-const emailSignIn = data => {
-    signInWithEmailAndPassword(auth, data.get('loginEmail'), data.get('loginPassword'))
-        .then(userCredential => {
-            Swal.fire({
-                title: 'Success authentication',
-                text: 'You have successfully signed in with email and password, now you will be redirected to the home page.',
-                icon: 'success',
-                confirmButtonText: 'Great!',
-                confirmButtonColor: '#2ecc71',
-                timer: 2000,
-                timerProgressBar: true,
+const errors = {
+    'auth/email-already-in-use': 'Email already in use',
+    'auth/invalid-email': 'Email is invalid',
+    'auth/popup-closed-by-user': 'Form has been compromised',
+    'auth/popup-closed-by-user': 'The popup has been closed by user',
+    'auth/weak-password': 'The password entered is weak',
+    'auth/wrong-password': 'Incorrect email and/or password',
+    'auth/user-not-found': 'Incorrect email and/or password',
+    'auth/account-exists-with-different-credential': 'The account already exists with different credential',
+    getError: function (code) {
+        return this[code] || code
+    }
+}
+
+export default function Authentication() {
+    const auth = getAuth(app)
+
+    const saveUserDataInLocalStorage = uid => {
+        localStorage.setItem('user-auth', uid)
+    }
+
+    async function createUser(email, password) {
+        const res = generateResponse()
+
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then(userData => {
+                res.success = true
+                res.uid = userData.user.uid
             })
+            .catch(error => res.msj = errors.getError(error.code))
 
-            setTimeout(() => window.location.href = 'dashboard.html', 2000)
-        })
-        .catch(error => {
-            console.error(error.message)
-            Swal.fire({
-                title: 'Something went wrong',
-                text: 'Something went wrong with your credentials, please try again with valid credentials.',
-                icon: 'error',
-                confirmButtonColor: '#e74c3c',
+        return res;
+    }
+
+    async function signInUser(email, password) {
+        const res = generateResponse()
+
+        await signInWithEmailAndPassword(auth, email, password)
+            .then(userData => {
+                const uid = userData.user.uid
+                res.success = true
+                res.uid = uid
+                saveUserDataInLocalStorage(uid)
             })
-        });
-}
+            .catch(error => res.msj = errors.getError(error.code));
 
-const googleSignIn = () => {
-    signInWithPopup(auth, new GoogleAuthProvider())
-        .then(result => {
-            const credential = GoogleAuthProvider.credentialFromResult(result)
-            const token = credential.accessToken
-            const user = result.user
+        return res;
+    }
 
-            if (token && user) {
-                Swal.fire({
-                    title: 'Success Google Login',
-                    text: 'You have successfully login with Google, now you will be redirected to the home page.',
-                    icon: 'success',
-                    confirmButtonText: 'Great!',
-                    confirmButtonColor: '#2ecc71',
-                    timer: 2000,
-                    timerProgressBar: true,
-                })
+    async function signInAPI(service) {
+        const res = generateResponse();
+        let provider = null;
 
-                setTimeout(() => window.location.href = 'dashboard.html', 2000)
-            }
-        }).catch(error => {
-            console.error(error)
-        })
-}
+        switch (service) {
+            case 'google':
+                provider = new GoogleAuthProvider()
+                break
+            case 'facebook':
+                provider = new FacebookAuthProvider()
+                break
+            default:
+                res.msj = 'Service provider not supported'
+        }
 
-const facebookSignIn = () => {
-    signInWithPopup(auth, new FacebookAuthProvider())
-        .then(result => {
-            const user = result.user
-            const credential = FacebookAuthProvider.credentialFromResult(result)
-            const accessToken = credential.accessToken
+        if (provider != null)
+            await signInWithPopup(auth, provider)
+            .then(userData => {
+                const {
+                    user: {
+                        email,
+                        photoURL,
+                        displayName,
+                        uid
+                    }
+                } = userData
 
-            if (accessToken && user) {
-                Swal.fire({
-                    title: 'Success Facebook Login',
-                    text: 'You have successfully login with Facebook, now you will be redirected to the home page.',
-                    icon: 'success',
-                    confirmButtonText: 'Great!',
-                    confirmButtonColor: '#2ecc71',
-                    timer: 2000,
-                    timerProgressBar: true,
-                })
+                res.success = true;
+                res.user = {
+                    email,
+                    photoURL,
+                    displayName,
+                    uid
+                };
+                res.uid = uid
+                saveUserDataInLocalStorage(uid)
+            })
+            .catch(error => res.msj = errors.getError(error.code))
 
-                setTimeout(() => window.location.href = 'dashboard.html', 2000)
-            }
-        })
-        .catch(error => {
-            console.error(error)
-        })
-}
+        return res
+    }
 
-const createUser = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-            return userCredential
-        }).catch(error => {
-            console.error(error)
-        })
-}
+    function logout() {
+        signOut(auth)
+    }
 
-export default {
-    emailSignIn,
-    facebookSignIn,
-    googleSignIn,
-    createUser
+    return ({
+        logout,
+        signInAPI,
+        signInUser,
+        createUser
+    })
 }

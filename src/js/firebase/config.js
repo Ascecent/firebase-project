@@ -2,7 +2,7 @@ import {
     initializeApp
 } from "firebase/app"
 
-export const app = initializeApp({
+export default initializeApp({
     apiKey: "AIzaSyDLhUzvlrUgb1Gt3_RG-QqeoEC9ZB9UXJE",
     authDomain: "fir-auth-aef27.firebaseapp.com",
     projectId: "fir-auth-aef27",

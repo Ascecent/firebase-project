@@ -15,7 +15,7 @@ const expressions = {
 // ------------------------------
 // Utility functions
 
-const getDOMItem = (selector, config) => {
+const getDOMItem = (selector, config = {}) => {
     return config['selector'] ? document.querySelector(selector) : document.getElementById(selector)
 }
 
@@ -24,7 +24,7 @@ const getDOMItems = selector => document.querySelectorAll(selector)
 // ------------------------------
 
 // Form validation implementation
-export const Validation = config => {
+function Validation(config) {
     const form = config.formId
     document.getElementById(form).reset()
     const items = config.DOMItems
@@ -36,9 +36,11 @@ export const Validation = config => {
             selector: true
         }),
         formControls = getDOMItems(`#${form} .${config.formControls}`),
-        formInputs = getDOMItems(`#${form} input, #${form} select`),
+        formInputs = getDOMItems(`#${form} input:not[type="file"], #${form} select`),
+        formFileInputs = getDOMItems(`#${form} input[type="file"]`),
         validationObject = Object.fromEntries(items.map(item => [item.id, false]))
 
+    console.log(formFileInputs)
     Object.preventExtensions(validationObject)
 
     let validityState = false
@@ -49,7 +51,6 @@ export const Validation = config => {
     // Validation functionality
 
     const validationHandler = target => {
-        console.log(target)
         const targetId = target.getAttribute('id'),
             item = items.find(element => element.id === targetId),
             value = target.value,
@@ -68,7 +69,6 @@ export const Validation = config => {
                     expressions.getExpression(validation).test(value);
             }
 
-
             validationObject[targetId] = validationState
             inputStateHandler(target, message, validationState)
 
@@ -82,7 +82,7 @@ export const Validation = config => {
     }
 
     const inputErrorStateHandler = (input, message) => {
-        const formControl = input.parentElement,
+        const formControl = input.input.parentElement,
             small = formControl.querySelector('.feedback-message')
 
         small.innerText = message
@@ -113,6 +113,14 @@ export const Validation = config => {
                     validationHandler(e.target)
                 })
             })
+
+            // if (formFileInputs) {
+            //     formFileInputs.forEach(input => {
+            //         input.addEventListener('click', e => {
+            //             validationHandler(e.target, true)
+            //         })
+            //     })
+            // }
         },
         getValidityState: () => validityState,
         getFormId: () => form,
@@ -124,6 +132,7 @@ export const Validation = config => {
             })
 
             return Object.fromEntries(output)
-        }
+        },
+        getFormDOMReference: () => getDOMItem(form)
     })
 }

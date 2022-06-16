@@ -5,20 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="../node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
     <title>Login</title>
 </head>
 
 <body data-barba="wrapper">
     <main data-barba="container" data-barba-namespace="login" class="main">
         <div class="transition"></div>
-
+        
         <section class="left-section">
-            <div class="graphic" id="graphic-container"></div>
-
             <div class="description">
                 <div class="description-line1">
-                    <img src="./assets/login-illustration-1.webp" alt="Login illustration" id="login-illustration">
+                    <img src="./assets/login-illustration-1.webp" alt="Login illustration">
                 </div>
                 <div class="description-line2">
                     <img src="./assets/treasure-logo.svg" alt="Feature highlight">
@@ -27,7 +24,7 @@
             </div>
         </section>
 
-        <section class="right-section">
+        <section class="right-section" id="login">
             <div class="logo-wrapper">
                 <img src="./assets/logo.svg" alt="Visme logo">
             </div>
@@ -59,8 +56,9 @@
                 <span>Or login with</span>
             </div>
             <div class="social-buttons">
-                <button class="btn btn-social-signin google" id="google-auth">Google</button>
-                <button class="btn btn-social-signin facebook" id="facebook-auth">Facebook</button>
+                <button class="btn btn-social-signin google" data-provider="google" id="google-auth">Google</button>
+                <button class="btn btn-social-signin facebook" data-provider="facebook"
+                    id="facebook-auth">Facebook</button>
             </div>
             <a href="signup.html" class="redirect">New to Visme? <strong>Sign Up</strong></a>
         </section>

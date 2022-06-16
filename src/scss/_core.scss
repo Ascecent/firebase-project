@@ -39,8 +39,11 @@ $breakpoints: (
 
 // Primary
 $primary: rgb(60, 172, 215);
+$sunshine: hsl(33, 100%, 58%);
 
-// Neutral
+// Neutral\
+$stars: hsl(11, 81%, 59%);
+$grayish: #314152;
 $success: #2ecc71;
 $error: #e74c3c;
 $black: hsl(0, 0%, 0%);
@@ -131,6 +134,10 @@ body {
     family: $fontFamilyNormal;
     weight: $fontWeightRegular;
   }
+}
+
+main {
+  height: 100vh;
 }
 
 h1,

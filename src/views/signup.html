@@ -13,15 +13,44 @@
         <div class="transition"></div>
 
         <section class="left-section">
-            <div class="graphic" id="graphic-container"></div>
-
             <div class="description">
-                <div class="description-line1">
-                    <img src="./../assets/login-illustration-1.webp" alt="Login illustration" id="login-illustration">
+                <div class="description-card">
+                    <p class="card-heading">15.3M</p>
+                    <p>Registered users</p>
                 </div>
-                <div class="description-line2">
-                    <img src="./../assets/treasure-logo.svg" alt="Feature highlight">
-                    <span>FEATURE HIGHLIGHT</span>
+                <div class="description-card">
+                    <p class="card-heading">32K+</p>
+                    <p>Projects created daily</p>
+                </div>
+                <div class="description-card">
+                    <div class="stars">
+                        <span class="fa-solid fa-star"></span>
+                        <span class="fa-solid fa-star"></span>
+                        <span class="fa-solid fa-star"></span>
+                        <span class="fa-solid fa-star"></span>
+                        <span class="fa-solid fa-star-half"></span>
+                    </div>
+                    <div class="reviews">
+                        <span class="rating">4.5/5.0</span>
+                        <span class="dash"> - </span>
+                        <span class="reviewsum">from 597 reviews</span>
+                    </div>
+                    <div class="review-logo"><span class="fa-brands fa-app-store-ios"></span></div>
+                </div>
+                <div class="description-card">
+                    <div class="stars">
+                        <span class="fa-solid fa-star"></span>
+                        <span class="fa-solid fa-star"></span>
+                        <span class="fa-solid fa-star"></span>
+                        <span class="fa-solid fa-star"></span>
+                        <span class="fa-solid fa-star-half"></span>
+                    </div>
+                    <div class="reviews">
+                        <span class="rating">4.5/5.0</span>
+                        <span class="dash"> - </span>
+                        <span class="reviewsum">from 185 reviews</span>
+                    </div>
+                    <div class="review-logo"><span class="fa-brands fa-google-play"></span></div>
                 </div>
             </div>
         </section>
@@ -35,9 +64,22 @@
             </p>
             <form id="signup-form" class="form-wrapper">
                 <div class="form-control">
+                    <!-- <div class="image-input" id="image-input">
+                        <div>
+                            Upload your profile photo
+                        </div>
+                        <input type="file" accept="image/*" id="signUpPhoto" name="signUpPhoto" required />
+                    </div>
+                    <div class="feedback">
+                        <span class="fa-solid fa-triangle-exclamation error-icon"></span>
+                        <small class="feedback-message">Default Message</small>
+                    </div> -->
+                </div>
+
+                <div class="form-control">
                     <input type="text" id="signUpFullName" name="signUpFullName" placeholder="Full name" required
                         title="Please enter your full name" />
-                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <span class="fa-solid fa-signature input-icon"></span>
                     <div class="feedback">
                         <span class="fa-solid fa-triangle-exclamation error-icon"></span>
                         <small class="feedback-message">Default Message</small>
@@ -47,7 +89,7 @@
                 <div class="form-control">
                     <input type="phone" id="signUpPhone" name="signUpPhone" placeholder="Phone number" required
                         title="Please enter your phone number" />
-                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <span class="fa-solid fa-phone input-icon"></span>
                     <div class="feedback">
                         <span class="fa-solid fa-triangle-exclamation error-icon"></span>
                         <small class="feedback-message">Default Message</small>
@@ -60,7 +102,7 @@
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
-                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <span class="fa-solid fa-mars-and-venus input-icon"></span>
                     <div class="feedback">
                         <span class="fa-solid fa-triangle-exclamation error-icon"></span>
                         <small class="feedback-message">Default Message</small>
@@ -80,7 +122,7 @@
                 <div class="form-control">
                     <input type="password" id="signUpPassword" name="signUpPassword" placeholder="Password" required
                         title="Please enter a valid password" />
-                    <span class="fa-solid fa-envelope input-icon"></span>
+                    <span class="fa-solid fa-key input-icon"></span>
                     <div class="feedback">
                         <span class="fa-solid fa-triangle-exclamation error-icon"></span>
                         <small class="feedback-message">Default Message</small>

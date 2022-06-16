@@ -16,3 +16,13 @@
   display: flex;
   align-items: center;
 }
+
+[data-barba-namespace="login"],
+[data-barba-namespace="signup"] {
+  place-items: center;
+  display: grid;
+
+  @include media-breakpoint-up("lg") {
+    grid-template-columns: 2fr 1.5fr;
+  }
+}

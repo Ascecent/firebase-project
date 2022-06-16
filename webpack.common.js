@@ -16,7 +16,7 @@ const rulesForHTML = {
 }
 
 const rulesForAssets = {
-    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+    test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
     exclude: "/node_modules",
     type: "asset/resource",
 }
