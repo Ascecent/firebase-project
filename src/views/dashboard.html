@@ -38,7 +38,7 @@
                 <div class="form-control">
                     <div class="image-input" id="image-input">
                         <div>
-                            Upload your profile photo
+                            Ingrese una foto de la dieta!
                         </div>
                         <input type="file" accept="image/*" id="signUpPhoto" name="signUpPhoto" required />
                     </div>
@@ -47,6 +47,37 @@
                     </div>
                 </div>
                 <button class="btn btn-submit" type="submit" id="ingreso-Plan">Registrar Plan Nutricional</button>
+            </form>
+
+            <form id="rutinas" class="form-wrapper">
+                <div class="form-control">
+                    <select name="grupo-muscular" id="grupo-muscular">
+                        <option value="P">Pecho</option>                            <option value="M">Martes</option>
+                        <option value="H">Hombros</option>
+                        <option value="T">Tríceps</option>
+                        <option value="E">Espalda</option>
+                        <option value="B">Bíceps</option>
+                        <option value="ABS">Abdominales</option>
+                        <option value="C">Cuádriceps</option>
+                        <option value="G">Glúteos</option>
+                        <option value="IS">Isquiotibiales</option>
+                        <option value="GE">Gemelos</option>
+                    </select>
+                    <textarea name="ejercicio" id="ejercicio" cols="30" rows="10" title="">  
+                     </textarea>
+                </div>
+                <div class="form-control">
+                    <div class="image-input" id="image-input">
+                        <div>
+                            Ingrese foto del ejercicio en cuestion!
+                        </div>
+                        <input type="file" accept="image/*" id="signUpPhoto" name="signUpPhoto" required />
+                    </div>
+                    <div class="feedback">
+                        <small class="feedback-message">Default Message</small>
+                    </div>
+                </div>
+                <button class="btn btn-submit" type="submit" id="ingreso-Plan">Registrar Rutina</button>
             </form>
         </div>
     </main>
