@@ -105,6 +105,26 @@
     }
   }
 
+  .parte1{
+    width: 75px;
+    height: 75px;
+    border: #000 solid 5px;
+  }
+
+  #plan-nutricional{
+    cursor: pointer;
+
+    border-radius: pxToRem(10);
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    background-size: cover;
+    background-position: center;
+    
+  }
+
   #signup-form {
     .image-input {
       cursor: pointer;
