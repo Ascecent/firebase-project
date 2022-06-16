@@ -14,7 +14,6 @@ const generateResponse = () => {
     }
 }
 
-//Storage:
 export default function Storage() {
     const storage = getStorage(app);
 

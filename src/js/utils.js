@@ -14,14 +14,21 @@ export const previewImage = input => {
     const file = input.files[0]
     let obs = null
 
-    if (file.size == 0) obs = 'El tamaño del archivo debe ser mayor a 0.'
-    else if (file.size > IMAGE_SIZE_MAX) obs = 'El tamaño del archivo no puede ser mayor a ' + SIZE_MAX + 'Mb.'
-    else if (file.type.split('/')[0] != 'image') obs = 'El formato del archivo cargado no es una imágen.'
+    if (file.size == 0) {
+        obs = 'File size must be larger than zero'
+    } else if (file.size > IMAGE_SIZE_MAX) {
+        obs = `File size cannot be larger than ${IMAGE_SIZE_MAX/1000} MB`
+    } else if (file.type.split('/')[0] != 'image') {
+        obs = "File format isn't supported"
+    }
 
     let url = ''
+
     if (obs) {
-        this.value = ''
-    } else url = URL.createObjectURL(file)
+        input.value = ''
+    } else {
+        url = URL.createObjectURL(file)
+    }
 
     if (obs) {
         Swal.fire({

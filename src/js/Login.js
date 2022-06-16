@@ -6,29 +6,30 @@ import {
 
 const dotLoader = createSpinnerLoader('dot-loader'),
     handleRes = res => {
-        dotLoader.remove()
-        const swalConfig = {
-            title: '',
-            text: '',
-            timer: 1500,
-            icon: res.success ? 'success' : 'error',
-            timerProgressBar: true,
-            confirmButtonColor: res.success ? '#2ecc71' : '#e74c3c',
-            confirmButtonText: 'Got it'
-        }
+        setTimeout(() => {
+            dotLoader.remove()
+            const swalConfig = {
+                title: '',
+                text: '',
+                timer: 1500,
+                icon: res.success ? 'success' : 'error',
+                timerProgressBar: true,
+                confirmButtonColor: res.success ? '#2ecc71' : '#e74c3c',
+                confirmButtonText: 'Got it'
+            }
 
-        if (res.success) {
-            setTimeout(() => {
-                window.location = './dashboard.html'
-            }, 1500)
+            if (res.success) {
+                setTimeout(() => {
+                    window.location = './dashboard.html'
+                }, 1500)
 
-            swalConfig.title = 'Success login'
-            swalConfig.text = 'You have successfully authenticated, now you will be redirected to the home page'
-        } else {
-            swalConfig.title = 'Oh no!, Something is wrong'
-            swalConfig.text = res.msj
-        }
-
+                swalConfig.title = 'Success login'
+                swalConfig.text = 'You have successfully authenticated, now you will be redirected to the home page'
+            } else {
+                swalConfig.title = 'Oh no!, Something is wrong'
+                swalConfig.text = res.msj
+            }
+        }, 500)
     }
 
 export default function Login(authentication) {

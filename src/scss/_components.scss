@@ -108,9 +108,8 @@
   #signup-form {
     .image-input {
       cursor: pointer;
-      
+
       border-radius: pxToRem(10);
-      border: 2px solid $black;
 
       width: pxToRem(150);
       height: pxToRem(150);
@@ -118,6 +117,9 @@
       display: flex;
       align-items: center;
       text-align: center;
+
+      background-size: cover;
+      background-position: center;
 
       input {
         display: none;
@@ -293,6 +295,10 @@
   position: relative;
   margin-block-end: pxToRem(35);
   color: $black;
+
+  .image-input {
+    border: 2px solid currentColor;
+  }
 
   .error-icon {
     visibility: hidden;

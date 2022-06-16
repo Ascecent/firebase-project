@@ -1,10 +1,14 @@
+import {
+    async
+} from "@firebase/util"
 import Swal from "sweetalert2"
 import {
     createSpinnerLoader,
     previewImage
 } from "./utils"
+import Validation from "./Validation"
 
-export default function SignUp(authentication, firestore) {
+export default function SignUp(authentication, firestore, storage) {
     const dotLoader = createSpinnerLoader('dot-loader'),
         validation = Validation({
             formId: 'signup-form',
@@ -18,9 +22,7 @@ export default function SignUp(authentication, firestore) {
                         validation
                     } = previewImage(target)
 
-                    console.log(url)
-                    console.log(validation)
-
+                    document.getElementById('image-input').style.backgroundImage = `url(${url})`;
                     return validation
                 }
             }, {
@@ -49,15 +51,15 @@ export default function SignUp(authentication, firestore) {
     validation.init()
 
     document.getElementById('image-input').addEventListener('click', () => {
-        console.log('Image fake container')
         document.getElementById('signUpPhoto').click()
     })
 
-    document.getElementById(validation.getFormId()).addEventListener('submit', function (e) {
+    document.getElementById(validation.getFormId()).addEventListener('submit', async function (e) {
         document.body.appendChild(dotLoader)
         e.preventDefault()
 
         if (!validation.getValidityState()) {
+            dotLoader.remove()
             Swal.fire({
                 title: 'Invalid form',
                 text: 'It seems that the form has been compromised, please refresh the page and try again.',
@@ -68,44 +70,58 @@ export default function SignUp(authentication, firestore) {
             return
         }
 
-        const data = validation.serializeInputs()
-        authentication.createUser(data.signUpEmail, data.signUpPassword).then(res => {
-            setTimeout(() => {
-                dotLoader.remove()
-                const swalConfig = {
-                    title: '',
-                    text: '',
-                    timer: 1500,
-                    icon: res.success ? 'success' : 'error',
-                    timerProgressBar: true,
-                    confirmButtonColor: res.success ? '#2ecc71' : '#e74c3c',
-                    confirmButtonText: 'Got it'
-                }
+        const data = validation.serializeInputs(),
+            {
+                success,
+                msj,
+                uid
+            } = await authentication.createUser(data.signUpEmail, data.signUpPassword)
 
-                if (res.success) {
-                    firestore.addData('users', {
-                        'auth-id': res.uid,
-                        'name': data.signUpFullName,
-                        'gender': data.signUpGender,
-                        'phone': data.signUpPhone,
-                        'userType': 'client'
-                    })
+        const swalConfig = {
+            title: '',
+            text: '',
+            timer: 1500,
+            icon: success ? 'success' : 'error',
+            timerProgressBar: true,
+            confirmButtonColor: success ? '#2ecc71' : '#e74c3c',
+            confirmButtonText: 'Got it'
+        }
 
-                    swalConfig.title = 'Successfully signed up'
-                    swalConfig.text = 'You have successfully signed up, now you will be redirected to the login page'
-                    validation.getFormDOMReference().reset()
+        console.log(data)
 
-                    setTimeout(() => {
-                        window.location = 'index.html'
-                    }, 1500)
+        if (success) {
+            const path = `users/profile_pictures/${uid}/`,
+                file = data.signUpPhoto,
+                profilePictureInfo = await storage.uploadFiles(path, file)
 
-                } else {
-                    swalConfig.title = 'Oh no! Something bad happened'
-                    swalConfig.text = res.msj
-                }
+            console.log(profilePictureInfo)
 
-                Swal.fire(swalConfig)
-            }, 500)
-        }).catch(err => console.error(err))
+            firestore.addData('users', {
+                'auth-id': uid,
+                'name': data.signUpFullName,
+                'gender': data.signUpGender,
+                'phone': data.signUpPhone,
+                'profilePicture': profilePictureInfo.path,
+                'userType': 'client'
+            }).then(res => {
+                setTimeout(() => {
+                    dotLoader.remove()
+                }, 500)
+
+                setTimeout(() => {
+                    window.location = 'index.html'
+                }, 1500)
+            })
+
+            swalConfig.title = 'Successfully signed up'
+            swalConfig.text = 'You have successfully signed up, now you will be redirected to the login page'
+            validation.getFormDOMReference().reset()
+        } else {
+            swalConfig.title = 'Oh no! Something bad happened'
+            swalConfig.text = msj
+        }
+
+        Swal.fire(swalConfig)
+
     })
 }

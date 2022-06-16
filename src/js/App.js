@@ -1,14 +1,18 @@
 import "Styles"
 import barba from "@barba/core"
 import barbaCss from "@barba/css"
+
 import Authentication from './firebase/Auth'
 import Firestore from './firebase/Firestore'
+import Storage from "./firebase/Storage"
+
 import Login from "./Login"
 import SignUp from "./SignUp"
 import "@fortawesome/fontawesome-free/js/all"
 
 const authentication = Authentication(),
-    firestore = Firestore()
+    firestore = Firestore(),
+    storage = Storage()
 
 barba.use(barbaCss)
 barba.init({
@@ -22,7 +26,7 @@ barba.init({
             namespace: 'signup',
             beforeEnter() {
                 console.log('signup')
-                SignUp(authentication, firestore)
+                SignUp(authentication, firestore, storage)
             }
         }
     ],
